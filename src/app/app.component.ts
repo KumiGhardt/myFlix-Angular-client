@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
-//import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -21,8 +21,8 @@ export class AppComponent {
     });
   }
 
-  // // Directs to login modal
-  // openUserLoginDialog(): void {
-  //   this.dialog.open(UserLoginFormComponent, {});
-  // }
+  // Directs to login modal
+  openUserLoginDialog(): void {
+    this.dialog.open(UserLoginFormComponent, {});
+  }
 }
