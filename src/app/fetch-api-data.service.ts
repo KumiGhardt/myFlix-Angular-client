@@ -59,7 +59,7 @@ export class UserLoginService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is JSON.stringify(${error.error})`
       );
     }
     return throwError('Something bad happened; please try again later');
