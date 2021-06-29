@@ -32,7 +32,7 @@ export class UserRegistrationService {
       console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+        `Error Status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later.');
@@ -137,7 +137,7 @@ export class GetOneMoviesService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -174,7 +174,7 @@ export class GetOneDirectorService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -211,7 +211,7 @@ export class GetOneGenreService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -248,7 +248,7 @@ export class GetUserService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -285,7 +285,7 @@ export class GetFavoriteMovieService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -322,7 +322,7 @@ export class GetAddFavoriteMovieService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -359,7 +359,7 @@ export class EditUserService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -397,7 +397,7 @@ export class DeleteUserService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');
@@ -437,7 +437,7 @@ export class DeleteMovieService {
       console.error('An error occurred: ', error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}, ` + `Error body is ${error.error}`
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later');

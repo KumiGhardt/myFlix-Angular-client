@@ -18,8 +18,20 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-//import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MovieDirectorComponent } from './movie-director/movie-director.component';
+import { MovieGenreComponent } from './movie-genre/movie-genre.component';
+import { MovieDescriptionComponent } from './movie-description/movie-description.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MatIconModule } from '@angular/material/icon';
 
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies', component: MovieCardComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+
+
+];
 
 @NgModule({
   declarations: [
@@ -28,8 +40,13 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     UserLoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
+    MovieDirectorComponent,
+    MovieGenreComponent,
+    MovieDescriptionComponent,
+    UserProfileComponent,
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
     //AppRoutingModule,
@@ -40,7 +57,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     MatButtonModule,
     [MatCardModule],
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

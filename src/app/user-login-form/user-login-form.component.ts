@@ -9,6 +9,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //brings in the API calls 
 import { UserLoginService } from '../fetch-api-data.service';
 
+//route
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-user-login-form',
@@ -19,10 +23,12 @@ export class UserLoginFormComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '' };
   
-  constructor(
-    public fetchApiData: UserLoginService,
-    public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar) { }
+    constructor(
+      public fetchApiData: UserLoginService,
+      public dialogRef: MatDialogRef<UserLoginFormComponent>,
+      public snackBar: MatSnackBar,
+      public router: Router
+    ) {}
 
   ngOnInit(): void {
   }
@@ -39,6 +45,8 @@ export class UserLoginFormComponent implements OnInit {
       this.snackBar.open("succes", 'OK', {
         duration: 2000
       });
+      this.router.navigate(['movies']);
     });
+    
   }
 }
