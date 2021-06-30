@@ -149,7 +149,7 @@ export class GetOneMoviesService {
 @Injectable({
   providedIn: 'root',
 })
-export class GetOneDirectorService {
+export class GetMovieDirectorService {
   constructor(private http: HttpClient) {}
 
   public getOneDirector(): Observable<any> {
@@ -186,7 +186,7 @@ export class GetOneDirectorService {
 @Injectable({
   providedIn: 'root',
 })
-export class GetOneGenreService {
+export class GetMovieGenreService {
   constructor(private http: HttpClient) {}
 
   public getOneGenre(): Observable<any> {

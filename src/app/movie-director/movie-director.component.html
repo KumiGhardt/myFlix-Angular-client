@@ -1,1 +1,12 @@
-<p>movie-director works!</p>
+<div class='director-container'>
+  <button id="close-button"
+    mat-icon-button
+    color='dark'
+    [mat-dialog-close]='true'>
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <h1>{{data.name}}</h1>
+  <p>Birthday: {{data.birth}}</p>
+  <p>Bio: {{data.bio}}</p>
+</div>
