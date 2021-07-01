@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { GetAllMoviesService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { MovieDescriptionComponent } from '../movie-description/movie-description.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 
 @Component({
@@ -13,7 +15,7 @@ import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
   styleUrls: ['./movie-card.component.scss'],
 })
 
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   //the movies returned from the API call 
   movies: any[] = [];
   constructor(
@@ -68,7 +70,7 @@ export class MovieCardComponent {
       data: { name, description },
     });
   }
-
+  
 
 }
 
