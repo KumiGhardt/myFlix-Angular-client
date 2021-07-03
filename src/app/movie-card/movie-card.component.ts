@@ -25,6 +25,7 @@ export class MovieCardComponent implements OnInit {
 
   constructor(
     public fetchApiData: GetAllMoviesService,
+    public addFavoriteMovie: GetAddFavoriteMovieService,
     public fetchfavoriteMovie: GetFavoriteMovieService,
     public fetchdeleteFavoriteMovie: DeleteMovieService,
     public fetchUser: GetUserService,
@@ -56,6 +57,7 @@ export class MovieCardComponent implements OnInit {
       panelClass: 'details-dialog',
     });
   }
+
 
   //director
   showDirectorDialog(name: string, bio: string, birth: string): void {
@@ -90,22 +92,22 @@ export class MovieCardComponent implements OnInit {
   /**
    * add or delete movie from favorites
    **/
-  onToggleFavoriteMovie(id: string): any {
-    if (this.isFavorite(id)) {
+  onToggleFavoriteMovie(_id: string): any {
+    if (this.isFavorite(_id)) {
       this.fetchdeleteFavoriteMovie.deleteMovie().subscribe((resp: any) => {
         this.snackBar.open('Removed from favorites!', 'OK', {
           duration: 2000,
         });
       });
-      const index = this.favoriteMovieIds.indexOf(id);
+      const index = this.favoriteMovieIds.indexOf(_id);
       return this.favoriteMovieIds.splice(index, 1);
     } else {
-      this.fetchfavoriteMovie.FavoriteMovie().subscribe((response: any) => {
+      this.addFavoriteMovie.FavoriteMovie(_id).subscribe((response: any) => {
         this.snackBar.open('Added to favorites!', 'OK', {
           duration: 2000,
         });
       });
     }
-    return this.favoriteMovieIds.push(id);
+    return this.favoriteMovieIds.push(_id);
   }
 }
