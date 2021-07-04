@@ -23,8 +23,7 @@ export class UserProfileComponent implements OnInit {
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   user: any = {};
-  movies: any = [];
-  favorites: any = [];
+  favoriteMovies: any = [];
 
   constructor(
     public fetchMovies: GetAllMoviesService,
@@ -41,10 +40,10 @@ export class UserProfileComponent implements OnInit {
     
   }
 
-  getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((res: any) => {
-      this.movies = res;
-      return this.movies;
+  getFavoriteMovies(): void {
+    this.getFavorite.FavoriteMovie('id').subscribe((res: any) => {
+      this.favoriteMovies = res;
+      return this.favoriteMovies;
     });
     this.getUser();
   }
@@ -53,8 +52,7 @@ export class UserProfileComponent implements OnInit {
     const user = localStorage.getItem('user');
     this.fetchUser.getUser().subscribe((res: any) => {
       this.user = res;
-      this.favorites = this.movies.filter((movie: any) => this.user.FavouriteMovies.includes(movie._id));
-      return this.user, this.favorites;
+      return this.user;
     });
   }
     

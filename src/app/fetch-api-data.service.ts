@@ -218,7 +218,6 @@ export class GetMovieGenreService {
   }
 }
 
-
 //favourite movie
 @Injectable({
   providedIn: 'root',

@@ -13,6 +13,7 @@ export class MovieDescriptionComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       title: string;
+      Image: string;
       description: string;
       director: string;
       genre: string;
