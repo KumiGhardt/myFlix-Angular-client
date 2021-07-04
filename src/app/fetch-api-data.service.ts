@@ -218,42 +218,6 @@ export class GetMovieGenreService {
   }
 }
 
-//get a user
-@Injectable({
-  providedIn: 'root',
-})
-export class GetUserService {
-  constructor(private http: HttpClient) {}
-
-  public getUser(): Observable<any> {
-    const token = localStorage.getItem('token');
-    //const user = localStorage.getItem('user');
-    return this.http
-      .get(apiUrl + 'users/:Username', {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-  // non-typed response extraction
-  private extractResponseData(res: Response | {}): Response | {} {
-    const body = res;
-    console.log(body);
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred: ', error.error.message);
-    } else {
-      console.error(
-        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
-      );
-    }
-    return throwError('Something bad happened; please try again later');
-  }
-}
 
 //favourite movie
 @Injectable({
@@ -262,11 +226,11 @@ export class GetUserService {
 export class GetFavoriteMovieService {
   constructor(private http: HttpClient) {}
 
-  public FavoriteMovie(): Observable<any> {
+  public FavoriteMovie(id: string): Observable<any> {
     const token = localStorage.getItem('token');
-    //const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
     return this.http
-      .post(apiUrl + 'users/:Username/Movies/:MovieID', {
+      .get(apiUrl + 'users/'+user+'/Movies/'+id, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -330,6 +294,45 @@ export class GetAddFavoriteMovieService {
   }
 }
 
+
+//Delete a movie from the favorite movies
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DeleteMovieService {
+  constructor(private http: HttpClient) {}
+
+  public deleteMovie(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    return this.http
+      .delete(apiUrl + 'users/'+user+'/Movies/'+id, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  // non-typed response extraction
+  private extractResponseData(res: Response | {}): Response | {} {
+    const body = res;
+    console.log(body);
+    return body || {};
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred: ', error.error.message);
+    } else {
+      console.error(
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
+      );
+    }
+    return throwError('Something bad happened; please try again later');
+  }
+}
+
 //Edit user
 @Injectable({
   providedIn: 'root',
@@ -341,7 +344,7 @@ export class EditUserService {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     return this.http
-      .put(apiUrl + 'users/:Username', {
+      .put(apiUrl + 'users/'+user, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -367,6 +370,42 @@ export class EditUserService {
   }
 }
 
+//get a user
+@Injectable({
+  providedIn: 'root',
+})
+export class GetUserService {
+  constructor(private http: HttpClient) {}
+
+  public getUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    return this.http
+      .get(apiUrl + 'users/'+user, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  // non-typed response extraction
+  private extractResponseData(res: Response | {}): Response | {} {
+    const body = res;
+    console.log(body);
+    return body || {};
+  }
+
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred: ', error.error.message);
+    } else {
+      console.error(
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
+      );
+    }
+    return throwError('Something bad happened; please try again later');
+  }
+}
 
 //Delete user
 @Injectable({
@@ -377,49 +416,9 @@ export class DeleteUserService {
 
   public deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
-    //const user = localStorage.getItem('user');
-    return this.http
-      .delete(apiUrl + 'users/:Username', {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-  // non-typed response extraction
-  private extractResponseData(res: Response | {}): Response | {} {
-    const body = res;
-    console.log(body);
-    return body || {};
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred: ', error.error.message);
-    } else {
-      console.error(
-        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
-      );
-    }
-    return throwError('Something bad happened; please try again later');
-  }
-}
-
-
-
-//Delete a movie from the favorite movies
-
-@Injectable({
-  providedIn: 'root',
-})
-export class DeleteMovieService {
-  constructor(private http: HttpClient) {}
-
-  public deleteMovie(): Observable<any> {
-    const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     return this.http
-      .delete(apiUrl + 'users/:Username/Movies/:MovieID', {
+      .delete(apiUrl + 'users/'+user, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -444,3 +443,4 @@ export class DeleteMovieService {
     return throwError('Something bad happened; please try again later');
   }
 }
+

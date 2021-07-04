@@ -3,27 +3,19 @@
 <div class="profile-container">
     <!-- Favorites -->
     <section>
-        <h2>Your Favorite Movies:</h2>
-        <div class="favorite-movies-container">
-          <mat-card class="favoriteMovie-card-container" *ngFor='let favorite of favorites'>
-            <mat-card-header class="favoriteMovie-card-header">
-              <mat-card-title class="favoriteMovie-card-title">{{favorite.Title}}</mat-card-title>
-              <mat-card-subtitle>Directed by: {{favorite.Director.Name}}</mat-card-subtitle>
-              <mat-card-content>Genre: {{favorite.Genre}}</mat-card-content>
-            </mat-card-header>
-            <img src={{favorite.ImagePath}} alt={{favorite.Title}} />
-            <mat-card-actions class="favoriteMovie-card-actions-container">
-              <button
-                mat-button
-                color='basic'
-                (click)='deleteMovie(favorite._id, favorite.Title)'            
-              >
-            
-                Remove Favorite
-              </button>
-            </mat-card-actions>
+      <h2 style="text-align: center; margin: 1rem;">Favourite Movies</h2>
+      <div style="display: flex; flex-flow: row wrap; justify-content: space-evenly;">
+          <mat-card *ngFor="let movie of favorites" style="flex: 1 1 auto; margin: 1rem 0.5rem; max-width: 182px;">
+              <mat-card-header>
+                  <mat-card-title style="height: 40px;">{{movie.Title}}</mat-card-title>
+                  <mat-icon (click)="deleteMovie(movie._id, movie.Title)" style="position: absolute; top: 14px; right: 14px;">
+                      close
+                  </mat-icon>
+                  <mat-card-subtitle>{{movie.ReleaseYear | date:'yyyy'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img src={{movie.ImagePath}} alt={{movie.Title}} style="margin: 0 auto;" />
           </mat-card>
-        </div>    
+      </div>   
       </section> 
 
     <!-- Update Profile -->
@@ -49,9 +41,9 @@
             class="btn-remove-account"
             mat-stroked-button
             (click)="deleteUser()"
-            color="primary"
+            color="warn"
           >
-            Remove Account
+            Delete Account
           </button>
         </mat-card-actions>
       </mat-card>

@@ -94,7 +94,7 @@ export class MovieCardComponent implements OnInit {
    **/
   onToggleFavoriteMovie(_id: string): any {
     if (this.isFavorite(_id)) {
-      this.fetchdeleteFavoriteMovie.deleteMovie().subscribe((resp: any) => {
+      this.fetchdeleteFavoriteMovie.deleteMovie(_id).subscribe((resp: any) => {
         this.snackBar.open('Removed from favorites!', 'OK', {
           duration: 2000,
         });

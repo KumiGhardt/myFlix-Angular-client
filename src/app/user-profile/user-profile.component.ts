@@ -38,35 +38,29 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    
+  }
+
+  getMovies(): void {
+    this.fetchMovies.getAllMovies().subscribe((res: any) => {
+      this.movies = res;
+      return this.movies;
+    });
+    this.getUser();
   }
 
   getUser(): void {
     const user = localStorage.getItem('user');
     this.fetchUser.getUser().subscribe((res: any) => {
       this.user = res;
-      this.getMovies();
+      this.favorites = this.movies.filter((movie: any) => this.user.FavouriteMovies.includes(movie._id));
+      return this.user, this.favorites;
     });
   }
-
-  getMovies(): void {
-    const user = localStorage.getItem('user');
-    this.fetchMovies.getAllMovies().subscribe((res: any) => {
-      this.movies = res;
-      this.filterFavorites();
-    });
-  }
-
-  filterFavorites(): void {
-    this.movies.forEach((movie: any) => {
-      if (this.favorites.includes(movie._id)) {
-        this.favorites.push(movie);
-      }
-    });
-    return this.favorites;
-  }
+    
 
   deleteMovie(id: string, title: string): void {
-    this.deleteFavorite.deleteMovie().subscribe(() => {
+    this.deleteFavorite.deleteMovie(id).subscribe(() => {
       this.snackBar.open(`${title} has been removed from your favorites!`, 'OK', {
         duration: 2000
       });
