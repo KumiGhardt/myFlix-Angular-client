@@ -218,42 +218,42 @@ export class GetMovieGenreService {
   }
 }
 
-//favourite movie
-@Injectable({
-  providedIn: 'root',
-})
-export class GetFavoriteMovieService {
-  constructor(private http: HttpClient) {}
+// //favourite movie there is no such route
+// @Injectable({
+//   providedIn: 'root',
+// })
+// export class GetFavoriteMovieService {
+//   constructor(private http: HttpClient) {}
 
-  public FavoriteMovie(id: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    return this.http
-      .get(apiUrl + 'users/'+user+'/Movies/'+id, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-  // non-typed response extraction
-  private extractResponseData(res: Response | {}): Response | {} {
-    const body = res;
-    console.log(body);
-    return body || {};
-  }
+//   public FavoriteMovie(id: string): Observable<any> {
+//     const token = localStorage.getItem('token');
+//     const user = localStorage.getItem('user');
+//     return this.http
+//       .get(apiUrl + 'users/'+user+'/Movies/'+id, {
+//         headers: new HttpHeaders({
+//           Authorization: 'Bearer ' + token,
+//         }),
+//       })
+//       .pipe(map(this.extractResponseData), catchError(this.handleError));
+//   }
+//   // non-typed response extraction
+//   private extractResponseData(res: Response | {}): Response | {} {
+//     const body = res;
+//     console.log(body);
+//     return body || {};
+//   }
 
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred: ', error.error.message);
-    } else {
-      console.error(
-        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
-      );
-    }
-    return throwError('Something bad happened; please try again later');
-  }
-}
+//   private handleError(error: HttpErrorResponse): any {
+//     if (error.error instanceof ErrorEvent) {
+//       console.error('An error occurred: ', error.error.message);
+//     } else {
+//       console.error(
+//         `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
+//       );
+//     }
+//     return throwError('Something bad happened; please try again later');
+//   }
+// }
 
 //add movie to favorites
 @Injectable({

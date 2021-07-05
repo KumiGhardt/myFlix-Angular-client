@@ -5,7 +5,6 @@ import {
   GetAllMoviesService,
   GetUserService,
   DeleteMovieService,
-  GetFavoriteMovieService,
 } from '../fetch-api-data.service';
 
 import { UserProfileUpdateComponent } from '../user-profile-update/user-profile-update.component';
@@ -23,39 +22,38 @@ export class UserProfileComponent implements OnInit {
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   user: any = {};
-  favoriteMovies: any = [];
+  movies: any = {};
+  favorites: any = [];
 
   constructor(
     public fetchMovies: GetAllMoviesService,
     public fetchUser: GetUserService,
     public deleteFavorite: DeleteMovieService,
-    public getFavorite: GetFavoriteMovieService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
-    
+    this.getUser();    
   }
 
   getFavoriteMovies(): void {
-    this.getFavorite.FavoriteMovie('id').subscribe((res: any) => {
-      this.favoriteMovies = res;
-      return this.favoriteMovies;
+    this.fetchMovies.getAllMovies().subscribe((res: any) => {
+      this.movies = res;
+      this.findFavorites();
     });
-    this.getUser();
   }
 
-  getUser(): void {
-    const user = localStorage.getItem('user');
-    this.fetchUser.getUser().subscribe((res: any) => {
-      this.user = res;
-      return this.user;
+  findFavorites(): void {
+    this.movies.forEach((movie: any) => {
+      if (this.user.FavoriteMovies.includes(movie._id)) {
+        this.favorites.push(movie);
+      }
     });
+    return this.favorites;
   }
-    
+
 
   deleteMovie(id: string, title: string): void {
     this.deleteFavorite.deleteMovie(id).subscribe(() => {
@@ -67,6 +65,15 @@ export class UserProfileComponent implements OnInit {
       }, 2000);
     });
   }
+
+  getUser(): void {
+    const user = localStorage.getItem('user');
+    this.fetchUser.getUser().subscribe((res: any) => {
+      this.user = res;
+      return this.user;
+    });
+  }
+  
 
   editUserData(): void {
     this.dialog.open(UserProfileUpdateComponent, {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   GetAllMoviesService,
-  GetFavoriteMovieService,
   GetAddFavoriteMovieService,
   DeleteMovieService,
   GetUserService,
@@ -26,7 +25,6 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchApiData: GetAllMoviesService,
     public addFavoriteMovie: GetAddFavoriteMovieService,
-    public fetchfavoriteMovie: GetFavoriteMovieService,
     public fetchdeleteFavoriteMovie: DeleteMovieService,
     public fetchUser: GetUserService,
     public dialog: MatDialog,
