@@ -38,14 +38,22 @@ export class UserProfileComponent implements OnInit {
     this.getUser();    
   }
 
-  getFavoriteMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((res: any) => {
-      this.movies = res;
-      this.findFavorites();
+  getUser(): void {
+    const user = localStorage.getItem('user');
+    this.fetchUser.getUser().subscribe((res: any) => {
+      this.user = res;
+      this.getMovies();
     });
   }
 
-  findFavorites(): void {
+  getMovies(): void {
+    this.fetchMovies.getAllMovies().subscribe((res: any) => {
+      this.movies = res;
+      this.filterFavorites();
+    });
+  }
+
+  filterFavorites(): void {
     this.movies.forEach((movie: any) => {
       if (this.user.FavoriteMovies.includes(movie._id)) {
         this.favorites.push(movie);
@@ -66,13 +74,7 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  getUser(): void {
-    const user = localStorage.getItem('user');
-    this.fetchUser.getUser().subscribe((res: any) => {
-      this.user = res;
-      return this.user;
-    });
-  }
+
   
 
   editUserData(): void {
