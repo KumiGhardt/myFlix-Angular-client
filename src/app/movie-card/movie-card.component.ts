@@ -20,7 +20,9 @@ import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 export class MovieCardComponent implements OnInit {
   //the movies returned from the API call
   movies: any[] = [];
+  favoriteMoviesArray: string[]= [];
   favoriteMovieIds: any[] = [];
+
 
   constructor(
     public fetchApiData: GetAllMoviesService,
@@ -76,15 +78,18 @@ export class MovieCardComponent implements OnInit {
    * check if movie is in favorites
    **/
   getFavoriteMovies(): void {
-    const user = localStorage.getItem('user');
     this.fetchUser.getUser().subscribe((resp: any) => {
-      this.favoriteMovieIds = resp.FavoriteMovies;
+      this.favoriteMovieIds = resp.favoriteMovies;
     });
   }
 
   // Checks the movieID against the list of favorites and returns a boolean.
   isFavorite(movieID: string): boolean {
-    return this.favoriteMovieIds.includes(movieID);
+    let favoriteMovies = localStorage.getItem('FavoriteMovies'); 
+    if(favoriteMovies !== null) 
+    this.favoriteMoviesArray = JSON.parse(favoriteMovies);
+    console.log(this.favoriteMoviesArray);
+    return this.favoriteMoviesArray.includes(movieID);
   }
 
   /**
@@ -93,6 +98,7 @@ export class MovieCardComponent implements OnInit {
   onToggleFavoriteMovie(_id: string): any {
     if (this.isFavorite(_id)) {
       this.fetchdeleteFavoriteMovie.deleteMovie(_id).subscribe((resp: any) => {
+        localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies))
         this.snackBar.open('Removed from favorites!', 'OK', {
           duration: 2000,
         });
@@ -100,7 +106,9 @@ export class MovieCardComponent implements OnInit {
       const index = this.favoriteMovieIds.indexOf(_id);
       return this.favoriteMovieIds.splice(index, 1);
     } else {
-      this.addFavoriteMovie.FavoriteMovie(_id).subscribe((response: any) => {
+      this.addFavoriteMovie.FavoriteMovie(_id).subscribe((resp: any) => {
+        console.log(resp);
+        localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies));
         this.snackBar.open('Added to favorites!', 'OK', {
           duration: 2000,
         });

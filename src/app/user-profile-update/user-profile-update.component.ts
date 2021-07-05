@@ -29,7 +29,6 @@ export class UserProfileUpdateComponent implements OnInit {
         duration: 2000
       });
     }, (res) => {
-      console.log(res);
       this.snackBar.open(res, 'OK', {
         duration: 2000
       });

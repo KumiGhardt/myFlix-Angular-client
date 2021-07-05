@@ -21,7 +21,6 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) {}
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http
       .post(apiUrl + 'users', userDetails)
       .pipe(catchError(this.handleError));
@@ -90,7 +89,6 @@ export class GetAllMoviesService {
   }
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
-    console.log(res);
     const body = res;
     return body || {};
   }
@@ -127,7 +125,6 @@ export class GetOneMoviesService {
   }
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
-    console.log(res);
     const body = res;
     return body || {};
   }
@@ -164,7 +161,6 @@ export class GetMovieDirectorService {
   }
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
-    console.log(res);
     const body = res;
     return body || {};
   }
@@ -201,7 +197,6 @@ export class GetMovieGenreService {
   }
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
-    console.log(res);
     const body = res;
     return body || {};
   }
@@ -218,42 +213,41 @@ export class GetMovieGenreService {
   }
 }
 
-// //favourite movie there is no such route
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class GetFavoriteMovieService {
-//   constructor(private http: HttpClient) {}
+//favourite movie 
+@Injectable({
+  providedIn: 'root',
+})
+export class GetFavoriteMovieService {
+  constructor(private http: HttpClient) {}
 
-//   public FavoriteMovie(id: string): Observable<any> {
-//     const token = localStorage.getItem('token');
-//     const user = localStorage.getItem('user');
-//     return this.http
-//       .get(apiUrl + 'users/'+user+'/Movies/'+id, {
-//         headers: new HttpHeaders({
-//           Authorization: 'Bearer ' + token,
-//         }),
-//       })
-//       .pipe(map(this.extractResponseData), catchError(this.handleError));
-//   }
-//   // non-typed response extraction
-//   private extractResponseData(res: Response | {}): Response | {} {
-//     const body = res;
-//     console.log(body);
-//     return body || {};
-//   }
+  public FavoriteMovie(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    return this.http
+      .get(apiUrl + 'users/'+user+'/Movies/'+id, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  // non-typed response extraction
+  private extractResponseData(res: Response | {}): Response | {} {
+    const body = res;
+    return body || {};
+  }
 
-//   private handleError(error: HttpErrorResponse): any {
-//     if (error.error instanceof ErrorEvent) {
-//       console.error('An error occurred: ', error.error.message);
-//     } else {
-//       console.error(
-//         `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
-//       );
-//     }
-//     return throwError('Something bad happened; please try again later');
-//   }
-// }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred: ', error.error.message);
+    } else {
+      console.error(
+        `Error status code ${error.status}, ` + `Error body is ${JSON.stringify(error.error)}`
+      );
+    }
+    return throwError('Something bad happened; please try again later');
+  }
+}
 
 //add movie to favorites
 @Injectable({
@@ -265,7 +259,6 @@ export class GetAddFavoriteMovieService {
   public FavoriteMovie(id: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
-    console.log({ token, user, id });
     return this.http
       .post(apiUrl + 'users/'+user+'/Movies/'+id, null, {
         headers: new HttpHeaders({
@@ -277,7 +270,6 @@ export class GetAddFavoriteMovieService {
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
     const body = res;
-    console.log(body);
     return body || {};
   }
 
@@ -316,7 +308,6 @@ export class DeleteMovieService {
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
     const body = res;
-    console.log(body);
     return body || {};
   }
 
@@ -353,7 +344,6 @@ export class EditUserService {
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
     const body = res;
-    console.log(body);
     return body || {};
   }
 
@@ -390,7 +380,6 @@ export class GetUserService {
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
     const body = res;
-    console.log(body);
     return body || {};
   }
 
@@ -427,7 +416,6 @@ export class DeleteUserService {
   // non-typed response extraction
   private extractResponseData(res: Response | {}): Response | {} {
     const body = res;
-    console.log(body);
     return body || {};
   }
 
