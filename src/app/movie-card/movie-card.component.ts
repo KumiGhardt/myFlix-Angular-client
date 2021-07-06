@@ -88,7 +88,6 @@ export class MovieCardComponent implements OnInit {
     let favoriteMovies = localStorage.getItem('FavoriteMovies'); 
     if(favoriteMovies !== null) 
     this.favoriteMoviesArray = JSON.parse(favoriteMovies);
-    console.log(this.favoriteMoviesArray);
     return this.favoriteMoviesArray.includes(movieID);
   }
 
@@ -107,7 +106,6 @@ export class MovieCardComponent implements OnInit {
       return this.favoriteMovieIds.splice(index, 1);
     } else {
       this.addFavoriteMovie.FavoriteMovie(_id).subscribe((resp: any) => {
-        console.log(resp);
         localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies));
         this.snackBar.open('Added to favorites!', 'OK', {
           duration: 2000,
