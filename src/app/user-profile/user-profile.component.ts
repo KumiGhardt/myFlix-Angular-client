@@ -64,7 +64,8 @@ export class UserProfileComponent implements OnInit {
 
 
   deleteMovie(id: string, title: string): void {
-    this.deleteFavorite.deleteMovie(id).subscribe(() => {
+    this.deleteFavorite.deleteMovie(id).subscribe((resp: any) => {
+      localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies))
       this.snackBar.open(`${title} has been removed from your favorites!`, 'OK', {
         duration: 2000
       });
@@ -74,8 +75,6 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-
-  
 
   editUserData(): void {
     this.dialog.open(UserProfileUpdateComponent, {
