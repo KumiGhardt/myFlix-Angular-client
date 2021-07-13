@@ -11,7 +11,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserProfileUpdateComponent implements OnInit {
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
-
+  /**
+   *
+   * @param fetchApiData
+   * @param dialogRef
+   * @param snackBar
+   */
+  
   constructor(
     public amendUser: EditUserService,
     public dialogRef: MatDialogRef<UserProfileUpdateComponent>,

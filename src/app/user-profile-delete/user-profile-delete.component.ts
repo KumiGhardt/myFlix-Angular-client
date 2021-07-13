@@ -10,6 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserProfileDeleteComponent implements OnInit {
 
+  /**
+   *
+   * @param fetchApiData
+   * @param dialogRef
+   * @param snackBar
+   */
   constructor(
     public removeUser: DeleteUserService,
     public router: Router,

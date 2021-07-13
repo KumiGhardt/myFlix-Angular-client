@@ -23,6 +23,13 @@ export class MovieCardComponent implements OnInit {
   favoriteMoviesArray: string[]= [];
   favoriteMovieIds: any[] = [];
 
+  /**
+   *
+   * @param fetchApiData
+   * @param dialog
+   * @param snackBar
+   * @param router
+   */
 
   constructor(
     public fetchApiData: GetAllMoviesService,
@@ -37,7 +44,9 @@ export class MovieCardComponent implements OnInit {
     this.getMovies();
   }
 
-  //get all movies
+/**
+ * gets all movies
+ */  
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -45,7 +54,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  //movie description
+  /**
+   *
+   * @param synopsis
+   * Opens modal with movie description 
+   */
   showDescriptionDialog(
     title: string,
     description: string,
@@ -59,7 +72,13 @@ export class MovieCardComponent implements OnInit {
   }
 
 
-  //director
+  /**
+   *
+   * @param name
+   * @param bio
+   * @param birth
+   * Opens modal with movie director information
+   */ 
   showDirectorDialog(name: string, bio: string, birth: string): void {
     this.dialog.open(MovieDirectorComponent, {
       data: { name, bio, birth },
@@ -67,7 +86,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  //genre
+   /**
+   *
+   * @param name
+   * @param description
+   * Opens modal with movie genre information
+   */ 
   showGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description },
@@ -75,15 +99,21 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * check if movie is in favorites
-   **/
+   * checks if movie is in user's list of favorites
+   * @param movie_id
+   * @returns 
+   */
   getFavoriteMovies(): void {
     this.fetchUser.getUser().subscribe((resp: any) => {
       this.favoriteMovieIds = resp.favoriteMovies;
     });
   }
 
-  // Checks the movieID against the list of favorites and returns a boolean.
+   /**
+   * Adds or removes movie from user's list of favorites
+   * @param id
+   * @returns
+   */
   isFavorite(movieID: string): boolean {
     let favoriteMovies = localStorage.getItem('FavoriteMovies'); 
     if(favoriteMovies !== null) 
@@ -92,8 +122,10 @@ export class MovieCardComponent implements OnInit {
   }
 
   /**
-   * add or delete movie from favorites
-   **/
+   * Adds or removes movie from user's list of favorites
+   * @param id
+   * @returns
+   */
   onToggleFavoriteMovie(_id: string): any {
     if (this.isFavorite(_id)) {
       this.fetchdeleteFavoriteMovie.deleteMovie(_id).subscribe((resp: any) => {

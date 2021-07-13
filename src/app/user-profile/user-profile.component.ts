@@ -25,6 +25,13 @@ export class UserProfileComponent implements OnInit {
   movies: any = {};
   favorites: any = [];
 
+   /**
+   * @param fetchApiData
+   * @param dialog
+   * @param snackBar
+   * @param router
+   */
+
   constructor(
     public fetchMovies: GetAllMoviesService,
     public fetchUser: GetUserService,
@@ -38,6 +45,9 @@ export class UserProfileComponent implements OnInit {
     this.getUser();    
   }
 
+  /**
+  * Gets Profile
+  **/ 
   getUser(): void {
     const user = localStorage.getItem('user');
     this.fetchUser.getUser().subscribe((res: any) => {
@@ -46,6 +56,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+    /**
+  * Gets users favorite movies
+  **/ 
   getMovies(): void {
     this.fetchMovies.getAllMovies().subscribe((res: any) => {
       this.movies = res;
@@ -53,6 +66,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+  * Filters users movies
+  * @param movie_id
+  **/ 
   filterFavorites(): void {
     this.movies.forEach((movie: any) => {
       if (this.user.FavoriteMovies.includes(movie._id)) {
@@ -62,7 +79,12 @@ export class UserProfileComponent implements OnInit {
     return this.favorites;
   }
 
-
+/**
+  * deletes users movies
+  * @param id
+  * @param title
+  * 
+  **/ 
   deleteMovie(id: string, title: string): void {
     this.deleteFavorite.deleteMovie(id).subscribe((resp: any) => {
       localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies))
@@ -75,12 +97,18 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-
+/**
+  * Updates Profile
+  **/ 
   editUserData(): void {
     this.dialog.open(UserProfileUpdateComponent, {
       width: '350px'
     });
   }
+
+  /**
+  * deletes profile
+  **/ 
 
   deleteUser(): void {
     this.dialog.open(UserProfileDeleteComponent);
