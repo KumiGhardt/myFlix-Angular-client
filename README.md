@@ -1,5 +1,5 @@
 # MyFlixAngularClient
-This project is an Angular-built client-side movie library. It is a movie library that allows users to sign up, see the library of movies along with their director, genres and descripts, favorite movies of their choice, edit and delete their profiles. MyBrary is based on a react project and takes its data from [my movie api](https://github.com/KumiGhardt/movie-api)
+This project is an Angular-built client-side movie library. It is a movie library that allows users to sign up, see the library of movies along with their director, genres and descripts, favorite movies of their choice, edit and delete their profiles. MyBrary is based on a react project and takes its data from [my movie api](https://github.com/KumiGhardt/movie-api) and is another version of the [initial react](https://github.com/KumiGhardt/mybrary) client side app.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
