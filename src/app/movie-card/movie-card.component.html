@@ -1,14 +1,14 @@
 <!-- display all returned movie -->
 <app-nav-bar></app-nav-bar>
-<div style="display: flex;">
-  <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
-    <mat-card-header>
+<div class="movies-container" style="display: flex;">
+  <mat-card  class="movie-card-container" *ngFor="let movie of movies;" style="flex: 1 1 auto;">
+    <mat-card-header class="movie-card-header">
       <mat-card-title>{{movie.Title}}</mat-card-title>
       <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
     </mat-card-header>
     <img src={{movie.ImagePath}} alt={{movie.Title}} />
 
-    <mat-card-actions>
+    <mat-card-actions class="movie-card-actions-container">
       <button mat-button color="primary" (click)='showDescriptionDialog(
             movie.Title,
             movie.Description,
