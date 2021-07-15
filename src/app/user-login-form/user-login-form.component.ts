@@ -7,7 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 //brings in the API calls 
-import { UserLoginService } from '../fetch-api-data.service';
+import { FetchApiDataService } from '../fetch-api-data.service';
 
 //route
 import { Router } from '@angular/router';
@@ -30,7 +30,7 @@ export class UserLoginFormComponent implements OnInit {
    * @param router
    */
     constructor(
-      public fetchApiData: UserLoginService,
+      public fetchApiData: FetchApiDataService,
       public dialogRef: MatDialogRef<UserLoginFormComponent>,
       public snackBar: MatSnackBar,
       public router: Router

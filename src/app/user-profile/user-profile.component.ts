@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-  GetAllMoviesService,
-  GetUserService,
-  DeleteMovieService,
-} from '../fetch-api-data.service';
+import { FetchApiDataService } from '../fetch-api-data.service';
 
 import { UserProfileUpdateComponent } from '../user-profile-update/user-profile-update.component';
 import { UserProfileDeleteComponent } from '../user-profile-delete/user-profile-delete.component';
@@ -33,9 +29,7 @@ export class UserProfileComponent implements OnInit {
    */
 
   constructor(
-    public fetchMovies: GetAllMoviesService,
-    public fetchUser: GetUserService,
-    public deleteFavorite: DeleteMovieService,
+    public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router
@@ -50,7 +44,7 @@ export class UserProfileComponent implements OnInit {
   **/ 
   getUser(): void {
     const user = localStorage.getItem('user');
-    this.fetchUser.getUser().subscribe((res: any) => {
+    this.fetchApiData.getUser().subscribe((res: any) => {
       this.user = res;
       this.getMovies();
     });
@@ -60,7 +54,7 @@ export class UserProfileComponent implements OnInit {
   * Gets users favorite movies
   **/ 
   getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((res: any) => {
+    this.fetchApiData.getAllMovies().subscribe((res: any) => {
       this.movies = res;
       this.filterFavorites();
     });
@@ -86,7 +80,7 @@ export class UserProfileComponent implements OnInit {
   * 
   **/ 
   deleteMovie(id: string, title: string): void {
-    this.deleteFavorite.deleteMovie(id).subscribe((resp: any) => {
+    this.fetchApiData.deleteMovie(id).subscribe((resp: any) => {
       localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies))
       this.snackBar.open(`${title} has been removed from your favorites!`, 'OK', {
         duration: 2000

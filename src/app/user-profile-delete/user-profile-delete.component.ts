@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeleteUserService,  } from '../fetch-api-data.service';
+import { FetchApiDataService  } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserProfileDeleteComponent implements OnInit {
    * @param snackBar
    */
   constructor(
-    public removeUser: DeleteUserService,
+    public fetchApiData: FetchApiDataService,
     public router: Router,
     public snackBar: MatSnackBar,
   ) { }
@@ -26,7 +26,7 @@ export class UserProfileDeleteComponent implements OnInit {
   }
 
   deleteUser(): void {
-    this.removeUser.deleteUser().subscribe(
+    this.fetchApiData.deleteUser().subscribe(
       (resp: any) => {
         this.snackBar.open(
           'Your account has successfully been deleted!',

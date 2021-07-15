@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EditUserService } from '../fetch-api-data.service';
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -19,7 +19,7 @@ export class UserProfileUpdateComponent implements OnInit {
    */
   
   constructor(
-    public amendUser: EditUserService,
+    public amendUser: FetchApiDataService,
     public dialogRef: MatDialogRef<UserProfileUpdateComponent>,
     public snackBar: MatSnackBar
   ) { }

@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  GetAllMoviesService,
-  GetAddFavoriteMovieService,
-  DeleteMovieService,
-  GetUserService,
-} from '../fetch-api-data.service';
+import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -32,10 +27,7 @@ export class MovieCardComponent implements OnInit {
    */
 
   constructor(
-    public fetchApiData: GetAllMoviesService,
-    public addFavoriteMovie: GetAddFavoriteMovieService,
-    public fetchdeleteFavoriteMovie: DeleteMovieService,
-    public fetchUser: GetUserService,
+    public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {}
@@ -104,7 +96,7 @@ export class MovieCardComponent implements OnInit {
    * @returns 
    */
   getFavoriteMovies(): void {
-    this.fetchUser.getUser().subscribe((resp: any) => {
+    this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favoriteMovieIds = resp.favoriteMovies;
     });
   }
@@ -128,7 +120,7 @@ export class MovieCardComponent implements OnInit {
    */
   onToggleFavoriteMovie(_id: string): any {
     if (this.isFavorite(_id)) {
-      this.fetchdeleteFavoriteMovie.deleteMovie(_id).subscribe((resp: any) => {
+      this.fetchApiData.deleteMovie(_id).subscribe((resp: any) => {
         localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies))
         this.snackBar.open('Removed from favorites!', 'OK', {
           duration: 2000,
@@ -137,7 +129,7 @@ export class MovieCardComponent implements OnInit {
       const index = this.favoriteMovieIds.indexOf(_id);
       return this.favoriteMovieIds.splice(index, 1);
     } else {
-      this.addFavoriteMovie.FavoriteMovie(_id).subscribe((resp: any) => {
+      this.fetchApiData.FavoriteMovie(_id).subscribe((resp: any) => {
         localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies));
         this.snackBar.open('Added to favorites!', 'OK', {
           duration: 2000,
