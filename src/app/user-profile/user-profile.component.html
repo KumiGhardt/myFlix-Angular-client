@@ -1,51 +1,44 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="profile-container">
-    <!-- Favorites -->
-    <section>
-      <h2 style="text-align: center; margin: 1rem;">Favourite Movies</h2>
-      <div style="display: flex; flex-flow: row wrap; justify-content: space-evenly;">
-          <mat-card *ngFor="let favorite of favorites" style="flex: 1 1 auto; margin: 1rem 0.5rem; max-width: 182px;">
-              <mat-card-header>
-                  <mat-card-title style="height: 40px;">{{favorite.Title}}</mat-card-title>
-                  <mat-icon (click)="deleteMovie(favorite._id, favorite.Title)" style="position: absolute; top: 14px; right: 14px;">
-                      close
-                  </mat-icon>
-                  <mat-card-subtitle>{{favorite.ReleaseYear | date:'yyyy'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img src={{favorite.ImagePath}} alt={{favorite.Title}} style="margin: 0 auto;" />
-          </mat-card>
-      </div>   
-      </section> 
-
-    <!-- Update Profile -->
-    <section>
-      <mat-card class="update-container">
-        <mat-card-header class="update-header">
-          <mat-card-title>Update Profile</mat-card-title>
+  <!-- Favorites -->
+  <section>
+    <h2 style="text-align: center; margin: 1rem;">Favourite Movies</h2>
+    <div style="display: flex; flex-flow: row wrap; justify-content: space-evenly;">
+      <mat-card *ngFor="let favorite of favorites" style="flex: 1 1 auto; margin: 1rem 0.5rem; max-width: 182px;">
+        <mat-card-header>
+          <mat-card-title style="height: 80px;">{{favorite.Title}}</mat-card-title>
+          <button mat-mini-fab  color="warn" aria-label="Delete favorite">
+          <mat-icon matTooltip="delete movie"
+          (click)="deleteMovie(favorite._id, favorite.Title)">
+            delete
+          </mat-icon>
+        </button>
+          <mat-card-subtitle>{{favorite.ReleaseYear | date:'yyyy'}}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
-        <mat-card-actions class="update-form--action">
-          <button
-            aria-label="button that submits form to update user account"
-            class="btn-update-account"
-            mat-raised-button
-            (click)="editUserData()"
-            color="primary"
-          >
-            Update
-          </button>
-          <button
-            aria-label="button that removes user account"
-            class="btn-remove-account"
-            mat-stroked-button
-            (click)="deleteUser()"
-            color="warn"
-          >
-            Delete Account
-          </button>
-        </mat-card-actions>
+        <img src={{favorite.ImagePath}} alt={{favorite.Title}} style="margin: 0 auto;" />
       </mat-card>
-    </section> 
-  </div>
+    </div>
+  </section>
+
+  <!-- Update Profile -->
+  <section>
+    <mat-card class="update-container">
+      <mat-card-header class="update-header">
+        <mat-card-title>Update Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions class="update-form--action">
+        <button aria-label="button that submits form to update user account" class="btn-update-account"
+          mat-raised-button (click)="editUserData()" color="primary">
+          Update
+        </button>
+        <button aria-label="button that removes user account" class="btn-remove-account" mat-stroked-button
+          (click)="deleteUser()" color="warn">
+          Delete Account
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+</div>

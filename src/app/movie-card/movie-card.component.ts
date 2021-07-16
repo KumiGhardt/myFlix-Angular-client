@@ -129,7 +129,7 @@ export class MovieCardComponent implements OnInit {
       const index = this.favoriteMovieIds.indexOf(_id);
       return this.favoriteMovieIds.splice(index, 1);
     } else {
-      this.fetchApiData.FavoriteMovie(_id).subscribe((resp: any) => {
+      this.fetchApiData.addFavoriteMovie(_id).subscribe((resp: any) => {
         localStorage.setItem('FavoriteMovies', JSON.stringify(resp.FavoriteMovies));
         this.snackBar.open('Added to favorites!', 'OK', {
           duration: 2000,
